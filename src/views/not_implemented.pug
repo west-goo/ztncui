@@ -1,0 +1,20 @@
+//-
+  ztncui - ZeroTier network controller UI
+  Copyright (C) 2017-2021  Key Networks (https://key-networks.com)
+  Licensed under GPLv3 - see LICENSE for details.
+
+extends network_layout
+
+block net_content
+  - if (member !== undefined)
+    h4 成员
+      a(href='../' + member.address)  #{member.address}
+  h4 编辑
+    b  #{title}
+    |  尚未完成。
+
+  h4
+    | 请注意，你还可以编辑 
+    strong
+      a(href='/controller/network/' + network.nwid + '#members') 其他
+    |  页。

@@ -1,0 +1,30 @@
+//-
+  ztncui - ZeroTier network controller UI
+  Copyright (C) 2017-2021  Key Networks (https://key-networks.com)
+  Licensed under GPLv3 - see LICENSE for details.
+
+extends network_layout
+
+block net_content
+  if member.deleted
+    .alert.alert-success
+      strong #{member.name} (#{member.id}) 已被删除
+    a.btn.btn-default(href=('/controller/network/' + network.nwid + '#members') name='networks' role='button') 成员
+
+  else
+    .alert.alert-info
+      strong
+        ul
+          li 想要撤销删除成员，仅需要将该成员再一次加入网络.
+          li 删除成员后，你可能会再次看到它们出现在成员列表中。这是ZeroTier的问题。只需让用户离开网络即可。
+
+    form(method='POST' action='')
+      button.btn.btn-primary(type='submit', name='delete') 删除 #{member.name} (#{member.id})
+      = ' '
+      a.btn.btn-default(href='/controller/network/' + network.nwid + '#members',
+                                          name='cancel', role='button') 取消
+
+  if errors
+    ul
+      for err in errors
+        li!= err.msg
